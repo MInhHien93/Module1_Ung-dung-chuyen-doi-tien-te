@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App currency change</title>
+</head>
+<style>
+    td  {
+        width: 200px;
+    }
+</style>
+<body>
+<form>
+    <table style="text-align: center">
+        <tr>
+            <td>Amount</td>
+            <td>From Currency</td>
+            <td>To Currency</td>
+        </tr>
+        <tr>
+            <td><input type="number" id="inputAmount"></td>
+            <td>
+                <select name="selectFromMoney" class="currency" id="selectFromMoney" style="width: 150px">
+                    <option value="VND">VND</option>
+                    <option value="USD">USD</option>
+                </select>
+            </td>
+            <td>
+                <select name="selectToMoney" class="currency" id="selectToMoney" style="width: 150px">
+                    <option value="VND">VND</option>
+                    <option value="USD">USD</option>
+                </select>
+            </td>
+            <td>
+                <button type="button" id="btConvert" onclick="displayResult()" style="color: white; background-color: blue;">Convert</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<p id="displayResult" style="color: blue"></p>
+</body>
+<script>
+    function convert(a, b) {
+        let inputAmount = +document.getElementById("inputAmount").value;
+        let result;
+        if (a == "USD" && b == "VND") {
+            result = (inputAmount * 23000) + " VND";
+        } else if (a == "VND" && b == "USD") {
+            result = (inputAmount / 23000) + " USD";
+        } else {
+            result = inputAmount + " " + a;
+        }
+        return result;
+    }
+    function displayResult() {
+        let display = document.getElementById("displayResult");
+        let fromCurrency = document.getElementById("selectFromMoney").value;
+        let toCurrency = document.getElementById("selectToMoney").value;
+        display.innerHTML = convert(fromCurrency, toCurrency);
+    }
+</script>
+</html>
